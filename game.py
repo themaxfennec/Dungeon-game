@@ -2,11 +2,12 @@ import random
 
 from classes.Warrior import warrior
 from classes.Mage import mage
+from classes.Monk import monk
+from effects.stats import Effect, process_effects
 
 #test monster
 class mon:
     def __init__(self):
-        # randint(start, end) gives a whole number
         self.hp = random.randint(30, 40)
         self.attack = random.randint(3, 5)
 
@@ -19,12 +20,18 @@ global classes
 
 #class select
 while class_sec== True:
-    classes=input("Pick your class: warrior, mage, theif, monk, BLOOD LILYS!!!!!").lower()
+    classes=input("Pick your class: warrior, mage, theif, monk!!(enter quit to quit)").lower()
 
     if classes=="warrior":
         hero=warrior()
     elif classes=="mage":
         hero=mage()
+    elif classes=="monk":
+        hero=monk()
+    #elif classes=="theif":
+        #hero=theif()
+    elif classes=="quit":
+        break
     else:
         print("That is not a class. Please select a class")
         continue
@@ -56,7 +63,7 @@ while True:
 
             #player actions
             while action>0 and enemy.hp>0:
-                
+                process_effects(hero, timing="start")
                 #makes it so the action system works
                 print(f"\nActions remaining: {action}")
                 print(f"\nBlock: {defc}")
@@ -74,6 +81,7 @@ while True:
 
                 elif cmd == 'skill':
                     print("\n--- Available Skills (Type 'back' to return) ---")
+                    print(hero.skill['skills'])
 
                     choice = input("Use skill, 'info [name]', or 'back': ").lower()
 
@@ -86,14 +94,18 @@ while True:
                     continue
                 
                 action-=1
+                process_effects(hero, timing="end")
+
 
                 
     
-            # Monster hits back if it's still alive and heathy
+            #monster hits back if it's still alive and heathy
             if enemy.hp > 0:
+                process_effects(hero, timing="start")
                 dmg_hero=max(0,m_hit-defc)
                 hero.hp = hero.hp-dmg_hero
                 print(f"Monster hits you for {m_hit} you block {defc}! Your HP: {hero.hp}")
+                process_effects(hero, timing="end")
             
 
             #to make the parry work for the warrior
@@ -103,6 +115,7 @@ while True:
         #after
         if hero.hp <= 0:
             print("You died! Game Over.")
+            class_sec=True
             break
         else:
             print("Monster defeated! You move deeper into the dungeon.")
