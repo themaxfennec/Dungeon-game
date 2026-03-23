@@ -3,20 +3,20 @@ import random
 from classes.Warrior import warrior
 from classes.Mage import mage
 from classes.Monk import monk
+from enemys.monsters import Monster
 from effects.stats import Effect, process_effects
 
 #test monster
 class mon:
     def __init__(self):
+        self.name = "Monster"
         self.hp = random.randint(30, 40)
         self.attack = random.randint(3, 5)
+        self.statuses = {}
 
 floor = 1
 
 class_sec=True
-
-#makes classes work for combat
-global classes
 
 #class select
 while class_sec== True:
@@ -63,7 +63,7 @@ while True:
 
             #player actions
             while action>0 and enemy.hp>0:
-                process_effects(hero, timing="start")
+                
                 #makes it so the action system works
                 print(f"\nActions remaining: {action}")
                 print(f"\nBlock: {defc}")
@@ -77,7 +77,9 @@ while True:
 
                 #defence
                 elif cmd == 'def':
-                    defc= 1+random.randint(3,10)+defc
+                    defc= 1+hero.defc+defc
+                    print(f"You block for {defc} this turn!")
+                    defc_skill=defc
 
                 elif cmd == 'skill':
                     print("\n--- Available Skills (Type 'back' to return) ---")
@@ -85,6 +87,17 @@ while True:
 
                     choice = input("Use skill, 'info [name]', or 'back': ").lower()
 
+                    #use skill and add effcts to enemy or hero
+                    if choice == hero.skill['skills']:
+                        hit = random.randint(hero.skill['min_dmg'], hero.skill['max_dmg'])
+                        enemy.hp -= hit
+                        print(f"You used {hero.skill['skills']} for {hit}! Monster HP: {max(0, enemy.hp)}")
+                        #apply burn if the skill has burn and fire, 
+                        if hero.skill['skill_attribute'] == 'fire' and hero.skill['burn'] > 0:
+                            burn_effect = Effect(name="burn", stacks=hero.skill['burn'])
+                            burn_effect.apply(enemy)
+
+                    
                     if choice=='back':
                         print("Returning to Main")
                         continue
@@ -94,18 +107,17 @@ while True:
                     continue
                 
                 action-=1
-                process_effects(hero, timing="end")
+                process_effects(hero)
 
 
                 
     
             #monster hits back if it's still alive and heathy
             if enemy.hp > 0:
-                process_effects(hero, timing="start")
                 dmg_hero=max(0,m_hit-defc)
                 hero.hp = hero.hp-dmg_hero
                 print(f"Monster hits you for {m_hit} you block {defc}! Your HP: {hero.hp}")
-                process_effects(hero, timing="end")
+                process_effects(enemy)
             
 
             #to make the parry work for the warrior

@@ -8,7 +8,7 @@ class mage:
         self.defc=random.randint(5,8)
         self.action= 3
         self.statuses = {}
-        self.skill={'skills':'fireshot','min_dmg':5,'max_dmg':7,'burn':2, 'skill_dis': 'shoots a bolt of fire dealing 5 to 7 dmg and inflicts 2 burn.'}
+        self.skill={'skills':'fireshot', 'skill_attribute':'fire','min_dmg':5,'max_dmg':7,'burn':2, 'skill_dis': 'shoots a bolt of fire dealing 5 to 7 dmg and inflicts 2 burn.'}
     #starting relic
     #acid, lighting, fire, ice, and earth
 

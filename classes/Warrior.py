@@ -8,7 +8,7 @@ class warrior:
         self.defc=random.randint(5,15)
         self.action= 4
         self.statuses = {}
-        self.skill={}
+        self.skill={'skills':'shieldbash', 'skill_attribute':'physical', 'min_dmg': defc_skill, 'max_dmg': defc_skill + 6, 'skill_dis': 'charges the enemy with a shield, dealing block ammount as dmg.'}
     
     #change this in to a relic
     def parry(self, enemy, dmg_hero, hero):

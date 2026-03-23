@@ -1,8 +1,9 @@
-class Monster:
-    types_mon={}
+import random
 
-    def __init__(self, name, hp):
-        self.name = name
-        self.hp = hp
+class Monster:
+    def __init__(self):
+        self.name = "Monster"
+        self.hp = random.randint(30, 40)
+        self.attack = random.randint(3, 5)
         self.statuses = {}
 
