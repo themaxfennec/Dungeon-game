@@ -1,6 +1,7 @@
 # Dungeon-game
 
-!!!!THIS IS STILL HEAVILY IN DEVELOPMET!!!
+!!!!!Development has stopped for the terminal virsion BUT I am make the game with a interface in godot and will post it on steam.!!!!!!!
+
 This a concept for a game I might create in the future. I will be trying to post updates weekly for the development.
 
 You dive in as a class fighting monster. There are 4 class: warrior, mage, theif, and monk.
