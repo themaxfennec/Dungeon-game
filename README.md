@@ -1,6 +1,6 @@
 # Dungeon-game
 
-!!!!!Development has stopped for the terminal virsion BUT I am make the game with a interface in godot and will post it on steam.!!!!!!!
+!!!!!Development has stopped for the terminal virsion BUT I am making the game with a interface in godot and will post it on steam + itch.!!!!!!!
 
 This a concept for a game I might create in the future. I will be trying to post updates weekly for the development.
 
